@@ -3,14 +3,16 @@
 pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
-import "../src/RsaVerify.sol";
+import "forge-std/console.sol";
+import "../src/RsaVerifyContract.sol";
 
 /*
 https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Algorithm-Validation-Program/documents/dss/186-2rsatestvectors.zip file SigVer15_186-3.rsp
 */
 
 contract RsaVerifyTest is Test {
-   using RsaVerify for *;
+
+    RsaVerifyContract s_rsaVerifyContract = new RsaVerifyContract();
 
    bytes n = hex"a8d68acd413c5e195d5ef04e1b4faaf242365cb450196755e92e1215ba59802a"
              hex"afbadbf2564dd550956abb54f8b1c917844e5f36195d1088c600e07cada5c080"
@@ -33,7 +35,7 @@ contract RsaVerifyTest is Test {
                            hex"362456bc219fc6eb343ede6733f779f75853533bc9ab876188da8ad98f9ea2f3"
                            hex"35d2ceec34ef9cb2782bb0f79cad309608ddc222e00ebcff9d14f6e6ed39638b";
 
-        assertEq(RsaVerify.pkcs1Sha256Raw(Msg,S,e,n),true);
+        assertEq(s_rsaVerifyContract.pkcs1Sha256Raw(Msg,S,e,n),true);
    }
 
     /*
@@ -63,7 +65,7 @@ contract RsaVerifyTest is Test {
                            hex"94823250a000d56a5d00947800dcb2f4947f5b4eb18fa1dbdc6ab16be4b71311"
                            hex"02d4dff98ddeac38554473964d29cdc521ee690cde5a8cd16889aa090c32c53e";
 
-        assertEq(RsaVerify.pkcs1Sha256Raw(Msg,S,e,n),false);
+        assertEq(s_rsaVerifyContract.pkcs1Sha256Raw(Msg,S,e,n),false);
 
     }
 
@@ -94,7 +96,7 @@ contract RsaVerifyTest is Test {
                            hex"d12a5e0bd6adabc36f06d216a00b1942349710540555106aeb87f5cf3f78df91"
                            hex"8f36cf63291ef2a7064e31b84075d1c8b551225a25f59c721a3d77046078557f";
 
-        assertEq(RsaVerify.pkcs1Sha256Raw(Msg,S,e,n),false);
+        assertEq(s_rsaVerifyContract.pkcs1Sha256Raw(Msg,S,e,n),false);
 
     }
 
@@ -124,7 +126,7 @@ contract RsaVerifyTest is Test {
                            hex"d12a5e0bd6adabc36f06d216a00b1942349710540555106aeb87f5cf3f78df91"
                            hex"8f36cf63291ef2a7064e31b84075d1c8b551225a25f59c721a3d77046078557f";
 
-        assertEq(RsaVerify.pkcs1Sha256Raw(Msg,S,e,n),false);
+        assertEq(s_rsaVerifyContract.pkcs1Sha256Raw(Msg,S,e,n),false);
 
     }
 
@@ -154,7 +156,7 @@ contract RsaVerifyTest is Test {
                            hex"362456bc219fc6eb343ede6733f779f75853533bc9ab876188da8ad98f9ea2f3"
                            hex"35d2ceec34ef9cb2782bb0f79cad309608ddc222e00ebcff9d14f6e6ed39638b";
 
-        assertEq(RsaVerify.pkcs1Sha256Raw(Msg,S,e,n),true);
+        assertEq(s_rsaVerifyContract.pkcs1Sha256Raw(Msg,S,e,n),true);
 
     }
 
@@ -186,7 +188,7 @@ contract RsaVerifyTest is Test {
                            hex"8b2b0ff99005273287b8c3bed87993baf52f0e9d079281bc25a8694ed9692446"
                            hex"127c26c34f21e610a84f3617247ecfb3b5337fe59d1239dfb7fdac8694dbef0b";
 
-        assertEq(RsaVerify.pkcs1Sha256Raw(Msg,S,e,n),false);
+        assertEq(s_rsaVerifyContract.pkcs1Sha256Raw(Msg,S,e,n),false);
 
     }
 
@@ -218,7 +220,7 @@ contract RsaVerifyTest is Test {
                            hex"9399242aed6d984ca74fc6c2eb4dd4bb2cd7bf2125ec853f2bf757d665b29487"
                            hex"bc5b63df0d0b03b18608d3d9a7576ea0954aef3d3303f7d8fd7e7f9725c114e2";
 
-        assertEq(RsaVerify.pkcs1Sha256Raw(Msg,S,e,n),false);
+        assertEq(s_rsaVerifyContract.pkcs1Sha256Raw(Msg,S,e,n),false);
 
     }
 
@@ -276,7 +278,7 @@ contract RsaVerifyTest is Test {
                            hex"8E547B85FE0BB7D9E150DF19EEE734CF5338219C7F8F7B13B39F5384179F62C1"
                            hex"35E544CB70BE7505751F34568E06981095AEEC4F3A887639718A3E11D48C240D";
 
-        assertEq(RsaVerify.pkcs1Sha256Raw(Msg,S,e,nn),true);
+        assertEq(s_rsaVerifyContract.pkcs1Sha256Raw(Msg,S,e,nn),true);
     }
 
     /*
@@ -311,7 +313,7 @@ contract RsaVerifyTest is Test {
                          hex"1cc935dfa48de3c201099b5b417be748aef29248527e8bbb173cab76b48478d4"
                          hex"177b338fe1f1244e64d7d23f07add560d5ad50b68d6649a49d7bc3db686daaa7";
 
-        assertEq(RsaVerify.pkcs1Sha256Raw(m,S,e,N),true);
+        assertEq(s_rsaVerifyContract.pkcs1Sha256Raw(m,S,e,N),true);
 
      }
 
@@ -345,7 +347,7 @@ contract RsaVerifyTest is Test {
 
         bytes memory S = hex"9588b90b790d5774efeae15c33aeb237924b28ceab546c3a6a279fd5ce0b1fc4223c95ca8a3f5676796f4e8d92f6c70e805c3af383b3e06828c5f7144b0a220cb4b1fe84d9605148c768bcf892cf7fe1cf5381d0dd4cdbe7a3db07f0d2a351b0f5d47b502b2601600c454bfd774d3943737652eb8a6fd4ee179e244496db45bc";
 
-        assertEq(RsaVerify.pkcs1Sha256Raw(m,S,e,N),true);
+        assertEq(s_rsaVerifyContract.pkcs1Sha256Raw(m,S,e,N),true);
      }
 
     /**
@@ -388,6 +390,24 @@ contract RsaVerifyTest is Test {
 
         bytes memory S = hex"092752a69149489120691bf5fa24c2026786b9f440c14a512477773f11e31e1063c32c0419f2eb9e845d9a4e60793f0b60e6c6922545c10c0b08997bf6f417a27cd53fb994884780e2344e22f4661f66c6b64eec389c2bc18662752f7278130897a82f338e3a849df5b6796ddab3f82f454c10295c858fe1b58003a2cbea2a9d966f879cfe2974f9ec42721a49eed37ed7f126952990e9e300b15c95aa028ce58215829c77a3eb903ab91ee3c86f0283d7c796ddf3f2bdf8180e3ebf01afe8f248b896c76e97ed5e1edd07c6dde657eb6cdb4224b4832c1fc04b29da963d1bec6373013a2fa30a4daf2823466d59a23a32c4a3c18b615ef406beac8d086720c8";
 
-        assertEq(RsaVerify.pkcs1Sha256Raw(m,S,e,N),true);
+        assertEq(s_rsaVerifyContract.pkcs1Sha256Raw(m,S,e,N),true);
      }
+
+
+    // validated on-chain: https://testnet.snowtrace.io/tx/0xf837ed91622920b72684d647e9d230b7a8b738735967597c95ca28e075a34081?chainid=43113
+    function test_local_2048_modulus_65537_e_write_to_state() public {
+        bytes memory N = hex"C019E50727C192B393CE8E716D8A1CACA588CC069D80088CAD59778974C1217246F293B30F6A148866A7CACE3BB8C9FE2D6B18E29ED1306EE0B8E98F4C2CA1839D99D17335C53C0349C144AEA9D35DDDC4506D7FD3BD031A1FE3D2454D898EF0A804B2AA4C21894B8D59FC268BC5B13ACFBC549AC657DF37DD4D09052874E04DEBF6FEECDA0583EB8D5AE2FEEA581699D5A1762BB466DA0165F30EF72342A801E9F3F6DB475FD96E5A2C88F991FE1CEECFFA5A4E7D5C6E8329734C84EFFADB0158077AF06F6B3C529E28A1BEC424D3ECB9ED51B4B7BA72E1571323F6E46FABF27B1B7F1AD9EA6890937B85ECF47A75B13278FFC9B2B647E3665DA901FA34854D";
+
+        bytes memory e = hex"010001";
+
+        bytes memory m = "hello world";
+
+        bytes memory S = hex"092752a69149489120691bf5fa24c2026786b9f440c14a512477773f11e31e1063c32c0419f2eb9e845d9a4e60793f0b60e6c6922545c10c0b08997bf6f417a27cd53fb994884780e2344e22f4661f66c6b64eec389c2bc18662752f7278130897a82f338e3a849df5b6796ddab3f82f454c10295c858fe1b58003a2cbea2a9d966f879cfe2974f9ec42721a49eed37ed7f126952990e9e300b15c95aa028ce58215829c77a3eb903ab91ee3c86f0283d7c796ddf3f2bdf8180e3ebf01afe8f248b896c76e97ed5e1edd07c6dde657eb6cdb4224b4832c1fc04b29da963d1bec6373013a2fa30a4daf2823466d59a23a32c4a3c18b615ef406beac8d086720c8";
+
+        console.logBytes32(sha256(m));
+
+        assertTrue(s_rsaVerifyContract.pkcs1Sha256(sha256(m),S,e,N));
+        s_rsaVerifyContract.pkcs1Sha256RawAndWriteToState(m,S,e,N);
+     }
+
 }
