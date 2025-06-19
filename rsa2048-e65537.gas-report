@@ -1,0 +1,25 @@
+No files changed, compilation skipped
+
+Ran 10 tests for test/RsaVerifyOptimized-2048-e65537.t.sol:RsaVerifyOptimized_2048_e65537Test
+[32m[PASS][0m test_rs256_2048_e65537_1() (gas: 34818)
+[32m[PASS][0m test_rs256_2048_e65537_10() (gas: 19857)
+[32m[PASS][0m test_rs256_2048_e65537_2() (gas: 19923)
+[32m[PASS][0m test_rs256_2048_e65537_3() (gas: 34669)
+[32m[PASS][0m test_rs256_2048_e65537_4() (gas: 19571)
+[32m[PASS][0m test_rs256_2048_e65537_5() (gas: 34581)
+[32m[PASS][0m test_rs256_2048_e65537_6() (gas: 19769)
+[32m[PASS][0m test_rs256_2048_e65537_7() (gas: 34493)
+[32m[PASS][0m test_rs256_2048_e65537_8() (gas: 19703)
+[32m[PASS][0m test_rs256_2048_e65537_9() (gas: 34515)
+Suite result: [32mok[0m. [32m10[0m passed; [31m0[0m failed; [33m0[0m skipped; finished in 4.97ms (16.51ms CPU time)
+| src/RsaVerifyOptimized.sol:RsaVerifyOptimized contract |                 |       |        |       |         |
+|--------------------------------------------------------|-----------------|-------|--------|-------|---------|
+| Deployment Cost                                        | Deployment Size |       |        |       |         |
+| 221878                                                 | 1140            |       |        |       |         |
+| Function Name                                          | min             | avg   | median | max   | # calls |
+| pkcs1Sha256Raw                                         | 13216           | 20626 | 20626  | 28037 | 10      |
+
+
+
+
+Ran 1 test suite in 8.64ms (4.97ms CPU time): [32m10[0m tests passed, [31m0[0m failed, [33m0[0m skipped (10 total tests)
